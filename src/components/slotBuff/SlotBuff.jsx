@@ -106,7 +106,7 @@ export default function SlotBuff() {
     }
 
     return (
-        <div className="w-3/4 md:w-1/2 xl:w-1/4 mx-auto py-24 text-center">
+        <div className="w-3/4 xl:w-1/3 mx-auto py-24 text-center">
             <h1 className="text-5xl font-bold mb-10">MTC Simulator</h1>
             {
                 grades.map((row, idx) => (
@@ -128,17 +128,17 @@ export default function SlotBuff() {
             }
             <button type="button" className="w-full bg-blue-500 rounded-lg h-10 text-white" onClick={multipleCalc}>Calculate</button>
 
-            <div className="bg-gray-300 rounded-lg mt-5 pt-3 px-5 text-left">
+            <div className="bg-gray-300 rounded-lg mt-5 pt-3 pb-1 px-5 text-left">
                 {
                     buffs.map((row, idx) => (
-                        <div className="flex">
-                            <div className="mb-1 text-sm font-medium w-full md:w-1/2 whitespace-nowrap">{row.name}</div>
+                        <div className="md:flex">
+                            <div className="mb-1 text-sm font-medium w-full whitespace-nowrap">{row.name}</div>
                             <div className="w-full bg-gray-200 rounded-full mb-4">
                                 <div 
                                     className={`${row.color} text-sm font-medium text-blue-100 text-center p-0.5 leading-none rounded-full`} 
-                                    style={{ width: `${multiple*(buffIncreaseAmounts[idx]*100) > 10 ? multiple*(buffIncreaseAmounts[idx]*100) : 10}%`, maxWidth: '100%' }}
+                                    style={{ width: `${multiple*(buffIncreaseAmounts[idx]*100*100)/100 > 10 ? multiple*(buffIncreaseAmounts[idx]*100*100)/100 : 10}%`, maxWidth: '100%' }}
                                 >
-                                    {multiple*(buffIncreaseAmounts[idx]*100)}%
+                                    {multiple*(buffIncreaseAmounts[idx]*100*100)/100}%
                                 </div>
                             </div>
                         </div>
