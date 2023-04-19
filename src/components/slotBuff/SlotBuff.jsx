@@ -106,7 +106,7 @@ export default function SlotBuff() {
     }
 
     return (
-        <div className="w-1/4 mx-auto py-24 text-center">
+        <div className="w-3/4 md:w-1/2 xl:w-1/4 mx-auto py-24 text-center">
             <h1 className="text-5xl font-bold mb-10">MTC Simulator</h1>
             {
                 grades.map((row, idx) => (
@@ -132,7 +132,7 @@ export default function SlotBuff() {
                 {
                     buffs.map((row, idx) => (
                         <div className="flex">
-                            <div className="mb-1 text-sm font-medium w-1/2">{row.name}</div>
+                            <div className="mb-1 text-sm font-medium w-full md:w-1/2 whitespace-nowrap">{row.name}</div>
                             <div className="w-full bg-gray-200 rounded-full mb-4">
                                 <div 
                                     className={`${row.color} text-sm font-medium text-blue-100 text-center p-0.5 leading-none rounded-full`} 
