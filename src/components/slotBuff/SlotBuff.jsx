@@ -106,7 +106,7 @@ export default function SlotBuff() {
     }
 
     return (
-        <div className="w-3/4 xl:w-1/3 mx-auto pt-5 md:pt-10 text-center">
+        <div className="w-3/4 xl:w-1/3 mx-auto pt-5 md:pt-20 text-center">
             <h1 className="text-5xl font-bold mb-10">MTC Simulator</h1>
             {
                 grades.map((row, idx) => (

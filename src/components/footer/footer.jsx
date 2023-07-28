@@ -1,6 +1,6 @@
-import MoveImg from "./moveImg";
+import MoveImg from "./MoveImg";
 
-export default function footer(){
+export default function Footer(){
     return (
         <div>
         <MoveImg/>

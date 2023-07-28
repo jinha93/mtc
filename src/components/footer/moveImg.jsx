@@ -1,10 +1,10 @@
-import water_balloon_sm from "../../assets/images/water_balloon_lg.gif";
+import water_balloon_sm from "../../assets/images/21104.gif";
 
-import "./moveImg.css"
+import "./MoveImg.css"
 
 export default function MoveImg(props) {
     return (
-        <div className="relative h-[90px] overflow-x-hidden">
+        <div className="relative h-[90px] overflow-hidden">
             <img id="moveImg" src={water_balloon_sm} className="move-img"/>
         </div>
     )

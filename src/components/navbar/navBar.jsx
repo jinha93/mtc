@@ -1,5 +1,7 @@
 import { useState } from "react"
 
+import logo from "../../assets/images/21082.gif";
+
 export default function Navbar(props) {
 
     //모바일 메뉴 토글 버튼 동작 함수
@@ -15,7 +17,8 @@ export default function Navbar(props) {
                 <div className="flex lg:flex-1">
                     <a href="#" className="-m-1.5 p-1.5">
                         <span className="sr-only">Your Company</span>
-                        <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+                        {/* <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" /> */}
+                        <img className="h-8 w-auto scale-[2.2]" src={logo} alt="" />
                     </a>
                 </div>
                 {/* Mobile menu button */}

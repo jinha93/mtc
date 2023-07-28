@@ -1,19 +1,22 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import NavBar from './components/navbar/NavBar';
+import Footer from './components/footer/Footer';
+import Error from './components/Error';
+
 import SlotBuff from './components/slotBuff/SlotBuff';
-import NavBar from './components/navbar/navBar';
-import Footer from './components/footer/footer';
+import DpsCalculator from './components/dpsCalculator/DpsCalculator';
 
 const menus = [
   {
       name: 'Home',
       url: '/',
-      content: <SlotBuff />
+      content: <Error />
   },
   {
-      name: 'Comunnity',
-      url: '/comunnity',
-      content: <SlotBuff />
+      name: 'DPS Calculator',
+      url: '/dpsCalculator',
+      content: <DpsCalculator />
   },
   {
       name: 'Slot Simulator',
@@ -25,16 +28,16 @@ const menus = [
 function App() {
   return (
     <div className="App min-h-screen flex flex-col">
-      {/* <NavBar menus={menus}></NavBar> */}
-      <div className="flex-1 py-20">
-        <SlotBuff/>
-        {/* <BrowserRouter>
+      <NavBar menus={menus}></NavBar>
+      <div className="flex-1">
+        <BrowserRouter>
           <Routes>
             {menus.map((menu, index) => (
               <Route key={index} path={menu.url} element={menu.content}/>
             ))}
+            <Route path='/*' element={<Error />} />
           </Routes>
-        </BrowserRouter> */}
+        </BrowserRouter>
       </div>
       <Footer/>
     </div>
