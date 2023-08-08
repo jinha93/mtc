@@ -40,7 +40,10 @@ export default function SelectSkill(props) {
         const selectIndex = e.target.value;
 
         for(let skillIndex of skillArr){
-            if(skillIndex === selectIndex) alert('동일스킬존재'); return;
+            if(skillIndex === selectIndex){
+                alert('동일스킬존재'); 
+                return;
+            }
         }
         
         setSelectSkillIndex(selectIndex);
