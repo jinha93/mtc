@@ -14,7 +14,7 @@ const menus = [
       content: <Error />
   },
   {
-      name: 'DPS Calculator',
+      name: 'DPS Calculator(BETA)',
       url: '/dpsCalculator',
       content: <DpsCalculator />
   },

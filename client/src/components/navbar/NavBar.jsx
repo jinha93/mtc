@@ -70,7 +70,7 @@ export default function Navbar(props) {
                         <div className="-my-6 divide-y divide-gray-500/10">
                             <div className="space-y-2 py-6">
                                 {props.menus.map((menu, index) => (
-                                    menu.name === 'DPS Calculator'
+                                    menu.url === '/dpsCalculator'
                                     ? null
                                     :
                                     <a 
