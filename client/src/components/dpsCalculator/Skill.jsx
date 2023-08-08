@@ -11,13 +11,18 @@ export default function Skill(props){
         if(count-1 < 0){return;}
         setCount(count-1);
     }
+    
+    useEffect(() => {
+        setCount(props.skill.level)
+    }, [props.skill.level])
 
 
     useEffect(() => {
         const skillsData = [...props.skillsData];
-        skillsData[props.index] = {...props.skill, level: count}
+        skillsData[props.index] = {...props.skill, level:count}
         
         props.setSkillData(skillsData);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [count])
 
     return (
@@ -38,7 +43,8 @@ export default function Skill(props){
                     key={count}
                     defaultValue={count}
                     onChange={props.onChange}
-                    className="w-full h-3 bg-gray-200 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
+                    readOnly
+                    className="w-full h-3 bg-gray-200 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"                    
                 />
 
                 <button

@@ -57,7 +57,7 @@ export default function Navbar(props) {
                     <div className="flex items-center justify-between">
                         <a href="#!" className="-m-1.5 p-1.5">
                             <span className="sr-only">Your Company</span>
-                            <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+                            <img className="h-16 w-auto" src={logo} alt="" />
                         </a>
                         <button type="button" className="-m-2.5 rounded-md p-2.5 text-gray-700" onClick={()=>toggleMenu()}>
                             <span className="sr-only">Close menu</span>
@@ -70,6 +70,9 @@ export default function Navbar(props) {
                         <div className="-my-6 divide-y divide-gray-500/10">
                             <div className="space-y-2 py-6">
                                 {props.menus.map((menu, index) => (
+                                    menu.name === 'DPS Calculator'
+                                    ? null
+                                    :
                                     <a 
                                         key={index}
                                         href={menu.url}

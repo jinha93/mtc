@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react"
 import Stat from "./Stat";
 
 export default function Stats(props){

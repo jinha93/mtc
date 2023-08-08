@@ -29,7 +29,7 @@ function App() {
   return (
     <div className="App min-h-screen flex flex-col">
       <NavBar menus={menus}></NavBar>
-      <div className="flex-1">
+      <div className="h-full flex-1">
         <BrowserRouter>
           <Routes>
             {menus.map((menu, index) => (

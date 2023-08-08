@@ -1,12 +1,16 @@
 import { useState } from "react";
 
-export default function SelectNormalOrBoss(){
+export default function SelectNormalOrBoss(props){
 
     const tabs = [
         {name: '일반', value: 'N'}
         , {name: '보스', value: 'B'}
     ];
 
+    const onChange = (index) => {
+        setTab(index)
+        props.setNormalOrBoss(tabs[index].value)
+    }
     const [currentTab, setTab] = useState(0);
 
     return(
@@ -16,7 +20,7 @@ export default function SelectNormalOrBoss(){
                     <a
                         href="#!"
                         key={index}
-                        onClick={() => setTab(index)}
+                        onClick={() => onChange(index)}
                         className={
                             currentTab === index
                             ?
