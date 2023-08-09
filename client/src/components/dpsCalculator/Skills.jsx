@@ -13,7 +13,7 @@ export default function Skills(props) {
                 return (
                     <div key={index}>
                         <div className="border rounded-lg text-center bg-gray-400 text-white text-sm flex-1">{type}</div>
-                        <div className="grid grid-cols-6 gap-1 p-1">
+                        <div className="grid grid-cols-6 gap-x-2 gap-y-1 p-1">
                             {props.skillsData.map((skill, index) => {
                                 return (
                                     type === skill.type 

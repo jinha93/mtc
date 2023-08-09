@@ -2,21 +2,16 @@ import { useEffect, useState } from "react";
 
 export default function Skill(props){
 
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(props.skill.level);
     const add = () => {
         if(count+1 > 25){return;}
-        setCount(count+1);
+        setCount(parseInt(count)+1);
     }
     const minus = () => {
         if(count-1 < 0){return;}
-        setCount(count-1);
+        setCount(parseInt(count)-1);
     }
     
-    useEffect(() => {
-        setCount(props.skill.level)
-    }, [props.skill.level])
-
-
     useEffect(() => {
         const skillsData = [...props.skillsData];
         skillsData[props.index] = {...props.skill, level:count}
@@ -25,13 +20,21 @@ export default function Skill(props){
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [count])
 
+    const onChange = (e) => {
+        const { value } = e.target;
+        if(value > 25){ setCount(25); return;};
+        if(value < 0){ setCount(0); return;};
+        
+        setCount(value);
+    }
+
     return (
         <div className="w-full">
-            <img src={require(`../../assets/images/skills/${props.skill.id}.png`)} className="w-14 h-14 object-cover rounded-lg" alt={props.skill.name}></img>
-            <div className="flex items-center border border-gray-200 rounded h-5 bg-gray-200 text-center w-14">
+            <img src={require(`../../assets/images/skills/${props.skill.id}.png`)} className="w-full object-cover rounded-lg" alt={props.skill.name}></img>
+            <div className="flex items-center border border-gray-200 rounded h-5 bg-gray-200 text-center">
                 <button
                     type="button"
-                    className="leading-10 text-gray-600 transition hover:opacity-75"
+                    className="hidden sm:block leading-10 text-gray-600 transition hover:opacity-75"
                     onClick={() => minus()}
                 >
                     －
@@ -40,16 +43,16 @@ export default function Skill(props){
                 <input
                     type="number"
                     id="Quantity"
-                    key={count}
-                    defaultValue={count}
-                    onChange={props.onChange}
-                    readOnly
-                    className="w-full h-3 bg-gray-200 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"                    
+                    min={0}
+                    max={25}
+                    value={count}
+                    onChange={onChange}
+                    className="w-full h-3 bg-gray-200 border-transparent text-center text-sm [&::-webkit-inner-spin-button]:appearance-none"                    
                 />
 
                 <button
                     type="button"
-                    className="leading-10 text-gray-600 transition hover:opacity-75"
+                    className="hidden sm:block leading-10 text-gray-600 transition hover:opacity-75"
                     onClick={() => add()}
                 >
                     ＋

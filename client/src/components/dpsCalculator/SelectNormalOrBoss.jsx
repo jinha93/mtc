@@ -24,9 +24,9 @@ export default function SelectNormalOrBoss(props){
                         className={
                             currentTab === index
                             ?
-                            "shrink-0 rounded-lg bg-gray-200 p-2 text-sm font-medium text-gray-700"
+                            "shrink-0 rounded-lg bg-gray-300 p-2 text-sm font-medium text-gray-700"
                             :
-                            "shrink-0 rounded-lg p-2 text-sm font-medium text-gray-500 border hover:bg-gray-200 hover:text-gray-700"
+                            "shrink-0 rounded-lg p-2 text-sm font-medium text-gray-500 border hover:bg-gray-300 hover:text-gray-700"
                         }
                     >
                         {tab.name}

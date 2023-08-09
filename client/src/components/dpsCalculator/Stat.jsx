@@ -9,7 +9,6 @@ export default function Stat(props){
         props.setStats(stats);
     };
 
-
     return(
         <div className="flex justify-between">
             <span className="text-sm truncate ">{props.stat.name}</span>
@@ -18,6 +17,7 @@ export default function Stat(props){
                 min={0}
                 onChange={onChange}
                 value={props.stat.value}
+                placeholder={0}
                 className="text-sm text-right w-14 border border-gray-400 rounded-md h-5 px-1 [&::-webkit-inner-spin-button]:appearance-none"
             >
             </input>
