@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Compatibility from "./Compatibility";
 
 export default function SelectSkill(props) {
@@ -176,22 +176,56 @@ export default function SelectSkill(props) {
         // 최종 DPS 적용
         props.setTotalDpsArrIndex(props.index, dps);
     }
+
+    const typeData = [
+        'default','근접','낙하','버프','범위','실드','투사체'
+    ]
+
     return (
         <div className="border-2 border-gray-900 rounded-lg w-full h-full p-3">
             <div className="md:flex">
                 <img src={require(`../../assets/images/skills/${skillData[selectSkillIndex].id}.png`)} className="w-14 h-14 object-cover border rounded-lg border-gray-900 mx-auto md:mx-0" alt={'스킬선택'}></img>
                 <div className="w-full mt-1 md:mt-0 md:ml-1 grid grid-rows-2 gap-1 h-14">
                     <select className="w-full border rounded-lg border-gray-900 text-gray-700 text-sm" onChange={onChangeSkill} value={selectSkillIndex}>
-                        {props.skillsData.map((skill, index) => {
-                            return (
-                                <option
-                                    key={index}
-                                    value={index}
-                                >
-                                    {skill.name}
-                                </option>
-                            )
-                        })}
+                    {typeData.map((type, index) => {
+                        return (
+                            type !== 'default'
+                            ?
+                                <optgroup label={type} key={index}>
+                                {props.skillsData.map((skill, index) => {
+                                    return (
+                                        type === skill.type 
+                                        ?
+                                            <option
+                                                key={index}
+                                                value={index}
+                                            >
+                                                {skill.name}
+                                            </option>
+                                        :
+                                            null
+                                    )
+                                })}
+                                </optgroup>
+                            :
+                                <Fragment key={index}>
+                                {props.skillsData.map((skill, index) => {
+                                    return (
+                                        type === skill.type 
+                                        ?
+                                            <option
+                                                key={index}
+                                                value={index}
+                                            >
+                                                {skill.name}
+                                            </option>
+                                        :
+                                            null
+                                    )
+                                })}
+                                </Fragment>
+                        )
+                    })}
                     </select>
                     <Compatibility setCompatibility={setCompatibility} selectSkill={skillData[selectSkillIndex]}/>
                 </div>

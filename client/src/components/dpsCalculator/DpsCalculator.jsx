@@ -51,7 +51,7 @@ export default function DpsCalculator(){
     ]);
 
     const [skillsData, setSkillData] = useState([
-        {id: 'default', name: 'Please select'}
+        {id: 'default', name: 'Please select', type: 'default'}
         , {id: 'S01', name: '트리플 플래쉬', type: '근접', attribute: '무', hitCnt: '3', cooldown: '5', defaultCoefficient: '2', level:1}
         , {id: 'S02', name: '파이어 봄', type: '근접', attribute: '불', hitCnt: '1', cooldown: '3', defaultCoefficient: '3.5', level:1}
         , {id: 'S03', name: '아쿠아 슬랩', type: '근접', attribute: '물', hitCnt: '2', cooldown: '2', defaultCoefficient: '0.8', level:1}
