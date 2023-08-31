@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export default function Skill(props){
 
-    const [count, setCount] = useState(props.skill.level);
+    const [count, setCount] = useState(props.skillData.level);
     const add = () => {
         if(count+1 > 25){return;}
         setCount(parseInt(count)+1);
@@ -11,12 +11,16 @@ export default function Skill(props){
         if(count-1 < 0){return;}
         setCount(parseInt(count)-1);
     }
+
+    useEffect(() => {
+        setCount(props.skillData.level);
+    }, [props.skillData])
     
     useEffect(() => {
-        const skillsData = [...props.skillsData];
-        skillsData[props.index] = {...props.skill, level:count}
+        const skillDataList = [...props.skillDataList];
+        skillDataList[props.index] = {...props.skillData, level:count}
         
-        props.setSkillData(skillsData);
+        props.setSkillDataList(skillDataList);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [count])
 
@@ -30,7 +34,7 @@ export default function Skill(props){
 
     return (
         <div className="w-full">
-            <img src={require(`../../assets/images/skills/${props.skill.id}.png`)} className="w-full object-cover rounded-lg" alt={props.skill.name}></img>
+            <img src={require(`../../assets/images/skills/${props.skillData.skill.skillId}.png`)} className="w-full object-cover rounded-lg" alt='스킬이미지'></img>
             <div className="flex items-center border border-gray-200 rounded h-5 bg-gray-200 text-center">
                 <button
                     type="button"
@@ -42,7 +46,6 @@ export default function Skill(props){
 
                 <input
                     type="number"
-                    id="Quantity"
                     min={0}
                     max={25}
                     value={count}

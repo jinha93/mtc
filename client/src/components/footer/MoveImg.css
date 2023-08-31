@@ -1,22 +1,50 @@
-
 .move-img {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    top: 0px;
-    animation-duration: 13s;
-    animation-name: slidein;
-    animation-iteration-count: infinite;
-    animation-direction: normal;
-    animation-timing-function: linear;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: -100px;
+  top: 0px;
+  animation-duration: 13s;
+  animation-name: slidein;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-timing-function: linear;
+}
+
+.move-img-2 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: -100px;
+  top: 0px;
+  animation-delay: 0.7s;
+  animation-duration: 13s;
+  animation-name: slidein;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-timing-function: linear;
+}
+
+.move-img-3 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: -100px;
+  top: 0px;
+  animation-delay: 1.4s;
+  animation-duration: 13s;
+  animation-name: slidein;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-timing-function: linear;
+}
+
+@keyframes slidein {
+  0% {
+    left: 100%;
   }
-  
-  @keyframes slidein {
-    0% {
-      left: 100%;
-    }
-  
-    100% {
-      left: -100px;
-    }
+
+  100% {
+    left: -100px;
   }
+}

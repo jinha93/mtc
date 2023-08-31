@@ -9,21 +9,22 @@ export default function DefaultAttack(props){
     useEffect(() => {
         calc();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[props.stats, props.normalOrBoss])
+    },[props.statDataList, props.myDps])
 
     const calc = () => {
         // 스탯
-        const attack = props.stats.find(v => v.id === 'attack').value
-        const attackSpeed = props.stats.find(v => v.id === 'attackSpeed').value/100
-        const criticalRate = props.stats.find(v => v.id === 'criticalRate').value/100
-        const criticalDamage = props.stats.find(v => v.id === 'criticalDamage').value/100
-        const bossAttack = props.stats.find(v => v.id === 'bossAttack').value/100
-        const allDamageRate = props.stats.find(v => v.id === 'allDamageRate').value/100
-        const rangedDamageRate = props.stats.find(v => v.id === 'rangedDamageRate').value/100
-        const normalAttackDamageRate = props.stats.find(v => v.id === 'normalAttackDamageRate').value/100
+        const attack = props.statDataList.find(v => v.stat.statId === 'attack').value
+        const attackSpeed = props.statDataList.find(v => v.stat.statId === 'attackSpeed').value/100
+        const criticalRate = props.statDataList.find(v => v.stat.statId === 'criticalRate').value/100
+        const criticalDamage = props.statDataList.find(v => v.stat.statId === 'criticalDamage').value/100
+        const bossAttack = props.statDataList.find(v => v.stat.statId === 'bossAttack').value/100
+        const allDamageRate = props.statDataList.find(v => v.stat.statId === 'allDamageRate').value/100
+        const rangedDamageRate = props.statDataList.find(v => v.stat.statId === 'rangedDamageRate').value/100
+        const normalAttackDamageRate = props.statDataList.find(v => v.stat.statId === 'normalAttackDamageRate').value/100
 
         // 보스공격대미지
-        const bossAttackDamage = props.normalOrBoss === 'B' ? 1+bossAttack : 1;
+        const normalOrBoss = props.myDps ? props.myDps.normalOrBoss : 'N';
+        const bossAttackDamage = normalOrBoss === 'B' ? 1+bossAttack : 1;
 
         // 대미지 = 공격력 * (1+모든대미지) * (1+스킬대미지) * (1+원거리대미지) * 기본공격대미지 * 보스공격대미지
         const damage = (attack*(1+allDamageRate)*(1+rangedDamageRate)*(1+normalAttackDamageRate) * bossAttackDamage).toFixed(1);

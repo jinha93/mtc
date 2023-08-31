@@ -14,16 +14,16 @@ export default function Skills(props) {
                     <div key={index}>
                         <div className="border rounded-lg text-center bg-gray-400 text-white text-sm flex-1">{type}</div>
                         <div className="grid grid-cols-6 gap-x-2 gap-y-1 p-1">
-                            {props.skillsData.map((skill, index) => {
+                            {props.skillDataList.map((skillData, index) => {
                                 return (
-                                    type === skill.type 
+                                    type === skillData.skill.type 
                                     ?
                                         <Skill
                                             key={index}
                                             index={index}
-                                            skill={skill}
-                                            skillsData={props.skillsData}
-                                            setSkillData={props.setSkillData}
+                                            skillData={skillData}
+                                            skillDataList={props.skillDataList}
+                                            setSkillDataList={props.setSkillDataList}
                                         />
                                     : 
                                         null

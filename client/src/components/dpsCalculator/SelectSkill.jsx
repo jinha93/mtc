@@ -8,25 +8,26 @@ export default function SelectSkill(props) {
     const [_dps, setDps] = useState(0);
 
     // 스탯 데이터 초기화
-    const [statData, setStatData] = useState(props.stats)
+    const [statDataList, setStatDataList] = useState(props.statDataList)
     useEffect(() => {
-        setStatData(props.stats)
+        setStatDataList(props.statDataList)
         // console.log('statData', statData)
-    }, [props.stats])
+    }, [props.statDataList])
 
     // 스킬 데이터 초기화
-    const [skillData, setSkillData] = useState(props.skillsData);
+    const [skillDataList, setSkillDataList] = useState(props.skillDataList);
     useEffect(() => {
-        setSkillData(props.skillsData)
+        setSkillDataList(props.skillDataList)
         // console.log('skillData', skillData)
-    }, [props.skillsData])
+    }, [props.skillDataList])
 
-    // 노말OR보스 여부 초기화
-    const [normalOrBoss, setNormalOrBoss] = useState('N')
+
+    // MyDps 정보 초기화
+    const [myDps, setMyDps] = useState(props.myDps);
     useEffect(() => {
-        setNormalOrBoss(props.normalOrBoss)
-        // console.log('normalOrBoss', normalOrBoss)
-    }, [props.normalOrBoss])
+        setMyDps(props.myDps)
+        // console.log('myDps', myDps)
+    }, [props.myDps])
 
     // 선택 스킬 배열 초기화
     const [skillArr, setSkillArr] = useState(props.skillArr)
@@ -56,9 +57,25 @@ export default function SelectSkill(props) {
         props.setSkillArrIndex(props.index, selectIndex);
     }
 
+    useEffect(() => {
+        let skillIndex = 0;
+        for (let skill of props.selectSkillList) {
+            if (skill.idx === props.index) {
+                skillIndex = skill.skillIdx
+            }
+        }
+        setSelectSkillIndex(skillIndex);
+
+        // 선택 스킬 저장
+        props.setSkillArrIndex(props.index, skillIndex);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.selectSkillList])
+
+
     // 스킬 계수 계산
     const calcCoefficient = (skill) => {
-        const { defaultCoefficient, level } = skill;
+        const { level } = skill;
+        const { coefficient } = skill.skill;
 
         if (level === undefined || level === 0) return 0;
         const bonusArr = [0, 0.18, 0.41, 0.54, 0.77];
@@ -74,54 +91,55 @@ export default function SelectSkill(props) {
             }
         }
 
-        return (Number(defaultCoefficient) + Number(defaultCoefficient) * Number(addCoefficient)).toFixed(2);
+        return (Number(coefficient) + Number(coefficient) * Number(addCoefficient)).toFixed(2);
     }
 
     useEffect(() => {
-        if (skillData[selectSkillIndex].id === 'default') return;
+        if (skillDataList[selectSkillIndex].skill.skillId === 'S00') return;
         calc();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [selectSkillIndex, skillData, statData, normalOrBoss, compatibility])
+    }, [selectSkillIndex, skillDataList, statDataList, myDps, compatibility, skillArr])
 
     // 계산
     const calc = () => {
         // 스탯
-        const attack = statData.find(v => v.id === 'attack').value
-        const criticalRate = statData.find(v => v.id === 'criticalRate').value / 100
-        const criticalDamage = statData.find(v => v.id === 'criticalDamage').value / 100
-        const bossAttack = statData.find(v => v.id === 'bossAttack').value / 100
-        const allDamageRate = statData.find(v => v.id === 'allDamageRate').value / 100
-        const skillDamageRate = statData.find(v => v.id === 'skillDamageRate').value / 100
-        const meleeDamageRate = statData.find(v => v.id === 'meleeDamageRate').value / 100
-        const rangedDamageRate = statData.find(v => v.id === 'rangedDamageRate').value / 100
+        const attack = statDataList.find(v => v.stat.statId === 'attack').value
+        const criticalRate = statDataList.find(v => v.stat.statId === 'criticalRate').value / 100
+        const criticalDamage = statDataList.find(v => v.stat.statId === 'criticalDamage').value / 100
+        const bossAttack = statDataList.find(v => v.stat.statId === 'bossAttack').value / 100
+        const allDamageRate = statDataList.find(v => v.stat.statId === 'allDamageRate').value / 100
+        const skillDamageRate = statDataList.find(v => v.stat.statId === 'skillDamageRate').value / 100
+        const meleeDamageRate = statDataList.find(v => v.stat.statId === 'meleeDamageRate').value / 100
+        const rangedDamageRate = statDataList.find(v => v.stat.statId === 'rangedDamageRate').value / 100
 
-        const fireDamageRate = statData.find(v => v.id === 'fireDamageRate').value / 100
-        const waterDamageRate = statData.find(v => v.id === 'waterDamageRate').value / 100
-        const windDamageRate = statData.find(v => v.id === 'windDamageRate').value / 100
-        const groundDamageRate = statData.find(v => v.id === 'groundDamageRate').value / 100
-        const electricDamageRate = statData.find(v => v.id === 'electricDamageRate').value / 100
-        const iceDamageRate = statData.find(v => v.id === 'iceDamageRate').value / 100
-        const plantDamageRate = statData.find(v => v.id === 'plantDamageRate').value / 100
-        const poisonDamageRate = statData.find(v => v.id === 'poisonDamageRate').value / 100
-        const lightDamageRate = statData.find(v => v.id === 'lightDamageRate').value / 100
-        const darknessDamageRate = statData.find(v => v.id === 'darknessDamageRate').value / 100
+        const fireDamageRate = statDataList.find(v => v.stat.statId === 'fireDamageRate').value / 100
+        const waterDamageRate = statDataList.find(v => v.stat.statId === 'waterDamageRate').value / 100
+        const windDamageRate = statDataList.find(v => v.stat.statId === 'windDamageRate').value / 100
+        const groundDamageRate = statDataList.find(v => v.stat.statId === 'groundDamageRate').value / 100
+        const electricDamageRate = statDataList.find(v => v.stat.statId === 'electricDamageRate').value / 100
+        const iceDamageRate = statDataList.find(v => v.stat.statId === 'iceDamageRate').value / 100
+        const plantDamageRate = statDataList.find(v => v.stat.statId === 'plantDamageRate').value / 100
+        const poisonDamageRate = statDataList.find(v => v.stat.statId === 'poisonDamageRate').value / 100
+        const lightDamageRate = statDataList.find(v => v.stat.statId === 'lightDamageRate').value / 100
+        const darknessDamageRate = statDataList.find(v => v.stat.statId === 'darknessDamageRate').value / 100
 
         // 선택한 스킬 정보
-        const totalCoefficient = Number(calcCoefficient(skillData[selectSkillIndex]));
-        const type = skillData[selectSkillIndex].type;
-        const attribute = skillData[selectSkillIndex].attribute;
-        const hitCnt = Number(skillData[selectSkillIndex].hitCnt);
-        const cooldown = Number(skillData[selectSkillIndex].cooldown);
+        const totalCoefficient = Number(calcCoefficient(skillDataList[selectSkillIndex]));
+        const type = skillDataList[selectSkillIndex].skill.type;
+        const attribute = skillDataList[selectSkillIndex].skill.attribute;
+        const hitCnt = Number(skillDataList[selectSkillIndex].skill.hitCnt);
+        const cooldown = Number(skillDataList[selectSkillIndex].skill.cooldown);
 
         // 거리별 대미지
         const distanceDamage = type === '근접' ? meleeDamageRate : rangedDamageRate;
         // 보스공격대미지
-        const bossAttackDamage = normalOrBoss === 'B' ? 1 + bossAttack : 1;
+        const normalOrBoss = props.myDps ? props.myDps.normalOrBoss : 'N';
+        const bossAttackDamage = normalOrBoss ? 1 + bossAttack : 1;
         // 버프스킬
         let buffDamage = 0;
         for (let skillIndex of skillArr) {
-            if (skillIndex !== undefined && skillData[skillIndex].type === '버프') {
-                buffDamage = attribute === skillData[skillIndex].attribute ? calcCoefficient(skillData[skillIndex]) / 100 : 0;
+            if (skillIndex !== undefined && skillDataList[skillIndex].skill.type === '버프') {
+                buffDamage = attribute === skillDataList[skillIndex].skill.attribute ? calcCoefficient(skillDataList[skillIndex]) / 100 : 0;
             }
         }
         // 속성 대미지
@@ -178,29 +196,29 @@ export default function SelectSkill(props) {
     }
 
     const typeData = [
-        'default','근접','낙하','버프','범위','실드','투사체'
+        '기본','근접','낙하','버프','범위','실드','투사체'
     ]
 
     return (
         <div className="border-2 border-gray-900 rounded-lg w-full h-full p-3">
             <div className="md:flex">
-                <img src={require(`../../assets/images/skills/${skillData[selectSkillIndex].id}.png`)} className="w-14 h-14 object-cover border rounded-lg border-gray-900 mx-auto md:mx-0" alt={'스킬선택'}></img>
+                <img src={require(`../../assets/images/skills/${skillDataList[selectSkillIndex].skill.skillId}.png`)} className="w-14 h-14 object-cover border rounded-lg border-gray-900 mx-auto md:mx-0" alt={'스킬선택'}></img>
                 <div className="w-full mt-1 md:mt-0 md:ml-1 grid grid-rows-2 gap-1 h-14">
                     <select className="w-full border rounded-lg border-gray-900 text-gray-700 text-sm" onChange={onChangeSkill} value={selectSkillIndex}>
                     {typeData.map((type, index) => {
                         return (
-                            type !== 'default'
+                            type !== '기본'
                             ?
                                 <optgroup label={type} key={index}>
-                                {props.skillsData.map((skill, index) => {
+                                {props.skillDataList.map((skill, index) => {
                                     return (
-                                        type === skill.type 
+                                        type === skill.skill.type 
                                         ?
                                             <option
                                                 key={index}
                                                 value={index}
                                             >
-                                                {skill.name}
+                                                {skill.skill.skillName}
                                             </option>
                                         :
                                             null
@@ -209,15 +227,15 @@ export default function SelectSkill(props) {
                                 </optgroup>
                             :
                                 <Fragment key={index}>
-                                {props.skillsData.map((skill, index) => {
+                                {props.skillDataList.map((skill, index) => {
                                     return (
-                                        type === skill.type 
+                                        type === skill.skill.type 
                                         ?
                                             <option
                                                 key={index}
                                                 value={index}
                                             >
-                                                {skill.name}
+                                                {skill.skill.skillName}
                                             </option>
                                         :
                                             null
@@ -227,7 +245,7 @@ export default function SelectSkill(props) {
                         )
                     })}
                     </select>
-                    <Compatibility setCompatibility={setCompatibility} selectSkill={skillData[selectSkillIndex]}/>
+                    <Compatibility setCompatibility={setCompatibility} selectSkill={skillDataList[selectSkillIndex]}/>
                 </div>
             </div>
 
