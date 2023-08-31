@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from 'axios';
+import Loading from "../Loading";
 
 export default function SaveBox(props) {
 
@@ -15,6 +16,8 @@ export default function SaveBox(props) {
     };
 
     const select = () => {
+        setLoading(true);
+
         const user = {
             userId: idValue,
             password: pwValue
@@ -30,14 +33,20 @@ export default function SaveBox(props) {
             props.setStatDataList(userStatList)
             props.setMyDps(myDps)
             props.setSelectSkillList(selectSkillList);
+
+            setLoading(false);
         }).catch((error) => {
             alert(error.response.data.message)
             console.log(error);
+
+            setLoading(false);
         })
 
     };
 
     const save = () => {
+        setLoading(true);
+
         // ID, PW
         const userData = {
             userId: idValue,
@@ -57,7 +66,7 @@ export default function SaveBox(props) {
         }
 
         // MyDps 정보
-        const myDps = {...props.myDps, user: userData};
+        const myDps = {...props.myDps, user: userData, myDpsId:null};
 
         // 선택 스킬 정보
         const selectSkillList = [];
@@ -75,21 +84,31 @@ export default function SaveBox(props) {
             url: "/api/myDps",
             method: 'POST',
             data: {
-                userSkillDtoList:skillDataList,
-                userStatDtoList:statDataList,
-                myDpsDto:myDps,
-                selectSkillDtoList:selectSkillList,
+                userDto: userData,
+                userSkillDtoList: skillDataList,
+                userStatDtoList: statDataList,
+                myDpsDto: myDps,
+                selectSkillDtoList: selectSkillList,
             }
         }).then((result) => {
             alert(result.data.message)
+
+            setLoading(false);
         }).catch((error) => {
             alert(error.response.data.message)
             console.log(error);
+
+            setLoading(false);
         })
     }
 
 
+    // 로딩
+    const [loading, setLoading] = useState(false);
+
     return (
+        <>
+        <Loading loading={loading}/>
         <div className="border-2 border-gray-900 rounded-lg w-full h-full p-3">
             <h1 className="text-xl font-bold text-gray-900">저장 & 불러오기</h1>
             <div className="mt-2 gap-2 flex flex-col">
@@ -117,5 +136,6 @@ export default function SaveBox(props) {
                 </div>
             </div>
         </div>
+        </>
     )
 }

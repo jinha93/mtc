@@ -76,6 +76,12 @@ public class MyDpsController {
 	@PostMapping("/api/myDps")
 	public ResponseEntity<?> setMyDps(@RequestBody MyDpsDto.SaveRequestDto myDpsSaveDto) {
 		
+		// ID, PW 체크
+		UserDto resultUserDto = userService.userCheck(myDpsSaveDto.getUserDto());
+		if(resultUserDto == null) {
+			userService.save(myDpsSaveDto.getUserDto());
+		}
+		
 		// 스킬 저장
 		userSkillService.saveAll(myDpsSaveDto.getUserSkillDtoList());
 		

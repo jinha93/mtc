@@ -23,4 +23,8 @@ public class UserService {
 	public UserDto userCheck(UserDto userDto) {
 		return userMapper.toDto(userRepositoryCustom.findByUserIdAndPassword(userMapper.toEntity(userDto)));
 	}
+	
+	public UserDto save(UserDto userDto) {
+		return userMapper.toDto(userRepository.save(userMapper.toEntity(userDto)));
+	}
 }

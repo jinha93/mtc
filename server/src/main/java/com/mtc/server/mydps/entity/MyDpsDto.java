@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.mtc.server.selectskill.entity.SelectSkillDto;
 import com.mtc.server.user.entity.User;
+import com.mtc.server.user.entity.UserDto;
 import com.mtc.server.userskill.entity.UserSkillDto;
 import com.mtc.server.userstat.entity.UserStatDto;
 
@@ -27,6 +28,7 @@ public class MyDpsDto {
 	@Getter
 	@Setter
 	public static class SaveRequestDto{
+		private UserDto userDto;
 		private List<UserSkillDto> userSkillDtoList;
 		private List<UserStatDto> userStatDtoList;
 		private MyDpsDto myDpsDto;
