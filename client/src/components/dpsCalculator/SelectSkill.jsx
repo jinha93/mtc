@@ -134,7 +134,8 @@ export default function SelectSkill(props) {
         const distanceDamage = type === '근접' ? meleeDamageRate : rangedDamageRate;
         // 보스공격대미지
         const normalOrBoss = props.myDps ? props.myDps.normalOrBoss : 'N';
-        const bossAttackDamage = normalOrBoss ? 1 + bossAttack : 1;
+        const bossAttackDamage = normalOrBoss === 'B' ? 1 + bossAttack : 1;
+        console.log(normalOrBoss);
         // 버프스킬
         let buffDamage = 0;
         for (let skillIndex of skillArr) {
