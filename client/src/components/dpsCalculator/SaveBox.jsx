@@ -45,6 +45,10 @@ export default function SaveBox(props) {
     };
 
     const save = () => {
+        if(!window.confirm("Do you want to save?")){
+            return;
+        }
+
         setLoading(true);
 
         // ID, PW

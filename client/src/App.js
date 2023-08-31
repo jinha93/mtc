@@ -35,7 +35,7 @@ function App() {
             {menus.map((menu, index) => (
               <Route key={index} path={menu.url} element={menu.content}/>
             ))}
-            <Route path='/*' element={<Error />} />
+            {/* <Route path='/*' element={<Error />} /> */}
           </Routes>
         </BrowserRouter>
       </div>
